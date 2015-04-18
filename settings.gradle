@@ -1,0 +1,6 @@
+include 'eurekaServer'
+include 'configServer'
+include 'serviceA'
+include 'serviceB'
+
+rootProject.name = 'spring-cloud-poc'

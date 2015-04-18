@@ -1,0 +1,23 @@
+info:
+  component: Service B
+spring:
+  application:
+    name: serviceB
+  cloud:
+    config:
+      url: http://configserver:8888
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.int}
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaserver:8761/eureka/

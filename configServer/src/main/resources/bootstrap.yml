@@ -1,0 +1,35 @@
+info:
+  component: Config Server
+spring:
+  application:
+    name: configServer
+  jmx:
+    default_domain: cloud.config.server
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://bitbucket.org/jasonbilyeu/spring-cloud-config-repo
+          repos:
+            - patterns: multi-repo-demo-*
+              uri: https://bitbucket.org/jasonbilyeu/spring-cloud-config-repo
+
+server:
+  port: 8888
+management:
+  context_path: /admin
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.int}
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaserver:8761/eureka/
