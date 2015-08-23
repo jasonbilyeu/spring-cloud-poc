@@ -6,7 +6,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
 	}
 }
 
@@ -22,7 +22,7 @@ allprojects {
 	apply plugin: 'idea'
 }
 
-def SPRING_CLOUD_VERSION = '1.0.0.RELEASE'
+def SPRING_CLOUD_VERSION = '1.0.2.RELEASE'
 
 subprojects {
 	apply plugin: 'java'
@@ -37,7 +37,7 @@ project(':eurekaServer') {
 	dependencies {
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
 		compile("org.springframework.cloud:spring-cloud-starter-eureka-server:" + SPRING_CLOUD_VERSION) {
-			exclude group: "javex.servlet", module: "sevlet-api"
+			exclude group: "javax.servlet", module: "servlet-api"
 		}
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 		compile 'org.projectlombok:lombok:1.16.2'
@@ -64,7 +64,7 @@ project(':configServer') {
 		compile 'com.sun.jersey:jersey-core:1.13'
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
 		compile 'org.springframework.cloud:spring-cloud-starter-eureka:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:' + SPRING_CLOUD_VERSION
+		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -86,7 +86,7 @@ project(':serviceA') {
 		compile 'org.springframework.cloud:spring-cloud-starter-eureka:' + SPRING_CLOUD_VERSION
 		compile 'org.springframework.cloud:spring-cloud-starter-feign:' + SPRING_CLOUD_VERSION
 		compile 'org.springframework.cloud:spring-cloud-config-client:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:' + SPRING_CLOUD_VERSION
+		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 		compile project(':serviceB')
 		compile 'com.netflix.hystrix:hystrix-javanica:1.3.17'
@@ -111,7 +111,7 @@ project(':serviceB') {
 		compile 'org.springframework.cloud:spring-cloud-starter-feign:' + SPRING_CLOUD_VERSION
 		compile 'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard:' + SPRING_CLOUD_VERSION
 		compile 'org.springframework.cloud:spring-cloud-config-client:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:' + SPRING_CLOUD_VERSION
+		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 		compile 'com.netflix.hystrix:hystrix-javanica:1.3.17'
 

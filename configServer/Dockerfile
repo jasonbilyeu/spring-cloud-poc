@@ -1,6 +1,6 @@
-FROM dockerfile/java:oracle-java7
+FROM java:7
 
-MAINTAINER: jasonbilyeu@ymail.com
+MAINTAINER jasonbilyeu@ymail.com
 
 WORKDIR /data
 

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.headspring.serviceb.client"})
 @RefreshScope
 @EnableHystrix
 @EnableHystrixDashboard

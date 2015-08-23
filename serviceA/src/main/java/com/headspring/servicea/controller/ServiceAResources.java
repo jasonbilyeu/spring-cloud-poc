@@ -1,5 +1,6 @@
 package com.headspring.servicea.controller;
 
+import com.headspring.serviceb.client.ServiceBClient;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -9,8 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ServiceAResources {
+
     @Autowired
     private DiscoveryClient discoveryClient;
+
+    @Autowired
+    private ServiceBClient serviceBClient;
 
     public String serviceBUrl() {
         InstanceInfo instanceInfo = discoveryClient.getNextServerFromEureka("serviceB", false);
@@ -26,6 +31,6 @@ public class ServiceAResources {
     @RequestMapping("/serviceBFeign")
     @HystrixCommand
     public String serviceBFeign() {
-        return null;
+        return serviceBClient.serviceBFeign();
     }
 }

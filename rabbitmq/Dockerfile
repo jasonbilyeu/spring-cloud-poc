@@ -1,39 +1,22 @@
-#
-# RabbitMQ Dockerfile
-#
-# https://github.com/dockerfile/rabbitmq
-#
+# DOCKER-VERSION 1.0.1
+# VERSION        0.5
 
-# Pull base image.
-FROM dockerfile/ubuntu
+FROM debian:jessie
+MAINTAINER Justin Plock <justin@plock.net>
 
-# Install RabbitMQ.
-RUN \
-  wget -qO - https://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add - && \
-  echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list && \
-  apt-get update && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
-  rm -rf /var/lib/apt/lists/* && \
-  rabbitmq-plugins enable rabbitmq_management && \
-  echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config && \
-  ulimit -n 1024 && \
-  mkdir -p /data/log && \
-  mkdir -p /data/mnesia && \
-  chown -R rabbitmq:rabbitmq /data
+ENV DEBIAN_FRONTEND noninteractive
 
-# Define environment variables.
-ENV RABBITMQ_LOG_BASE /data/log
-ENV RABBITMQ_MNESIA_BASE /data/mnesia
+RUN apt-get update && apt-get -y -q install wget logrotate
 
-# Define mount points.
-VOLUME ["/data/log", "/data/mnesia"]
+RUN wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+RUN apt-key add rabbitmq-signing-key-public.asc
+RUN echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
+RUN apt-get update
+RUN apt-get -y -q install rabbitmq-server
+RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
+RUN echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config
 
-# Define working directory.
-WORKDIR /data
+EXPOSE 5672 15672
 
-# Define default command.
-ENTRYPOINT /usr/sbin/rabbitmq-server
+ENTRYPOINT ["/usr/sbin/rabbitmq-server"]
 
-# Expose ports.
-EXPOSE 5672
-EXPOSE 15672

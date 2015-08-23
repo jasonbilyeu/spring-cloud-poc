@@ -30,22 +30,22 @@ serviceadev2:
       - spring.profiles.active=dev
       - server.port=8180
       - management.port=8181
-serviceadevci1:
-   build: ./serviceA
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - 8280:8280
-      - 8281:8281
-   expose:
-      - 8280
-      - 8281
-   environment:
-      - spring.profiles.active=devci
-      - server.port=8280
-      - management.port=8281
+#serviceadevci1:
+#   build: ./serviceA
+#   links:
+#      - configserver
+#      - eurekaserver
+#      - rabbitmq
+#   ports:
+#      - 8280:8280
+#      - 8281:8281
+#   expose:
+#      - 8280
+#      - 8281
+#   environment:
+#      - spring.profiles.active=devci
+#      - server.port=8280
+#      - management.port=8281
 servicebdev1:
    build: ./serviceB
    links:
@@ -78,22 +78,22 @@ servicebdev2:
       - spring.profiles.active=dev
       - server.port=8480
       - management.port=8481
-servicebdevci1:
-   build: ./serviceB
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - 8580:8580
-      - 8581:8581
-   expose:
-      - 8580
-      - 8581
-   environment:
-      - spring.profiles.active=devci
-      - server.port=8580
-      - management.port=8581
+#servicebdevci1:
+#   build: ./serviceB
+#   links:
+#      - configserver
+#      - eurekaserver
+#      - rabbitmq
+#   ports:
+#      - 8580:8580
+#      - 8581:8581
+#   expose:
+#      - 8580
+#      - 8581
+#   environment:
+#      - spring.profiles.active=devci
+#      - server.port=8580
+#      - management.port=8581
 configserver:
    build: ./configServer
    links:
