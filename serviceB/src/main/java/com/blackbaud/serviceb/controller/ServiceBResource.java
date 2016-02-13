@@ -1,4 +1,4 @@
-package com.headspring.serviceb.controller;
+package com.blackbaud.serviceb.controller;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.DiscoveryClient;

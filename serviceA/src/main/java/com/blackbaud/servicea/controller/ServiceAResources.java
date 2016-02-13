@@ -1,6 +1,6 @@
-package com.headspring.servicea.controller;
+package com.blackbaud.servicea.controller;
 
-import com.headspring.serviceb.client.ServiceBClient;
+import com.blackbaud.serviceb.client.ServiceBClient;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

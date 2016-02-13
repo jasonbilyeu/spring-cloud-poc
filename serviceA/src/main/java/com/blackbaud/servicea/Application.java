@@ -1,4 +1,4 @@
-package com.headspring.serviceb;
+package com.blackbaud.servicea;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.blackbaud.serviceb.client"})
 @RefreshScope
 @EnableHystrix
 @EnableHystrixDashboard
