@@ -5,7 +5,7 @@ spring:
     name: serviceA
   cloud:
     config:
-      url: http://configserver:8888
+      uri: http://configserver:8888
   rabbitmq:
     host: rabbitmq
     port: 5672

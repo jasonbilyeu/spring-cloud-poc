@@ -19,3 +19,4 @@ POC for Spring Cloud
     * Service A dev2 with Feign:            http://localhost:8180/serviceBFeign
     * Service B dev1:                       http://localhost:8380/
     * Service B dev2:                       http://localhost:8480/
+    * Service A Hystrix Dashboard:          http://localhost:8080/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8081%2Fhystrix.stream
