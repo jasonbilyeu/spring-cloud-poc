@@ -14,9 +14,5 @@ node {
   sh "./gradlew clean test"
 
   stage 'Stage Archive'
-  post {
-     always {
-        junit 'build/reports/**/*.xml'
-    }
-  }
+  junit allowEmptyResults: true, testResults: '**/build/test-reports/*.xml'
 }
