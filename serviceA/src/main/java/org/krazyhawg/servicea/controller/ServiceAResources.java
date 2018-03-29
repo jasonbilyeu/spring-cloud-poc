@@ -1,8 +1,8 @@
-package com.blackbaud.servicea.controller;
+package org.krazyhawg.servicea.controller;
 
-import com.blackbaud.serviceb.client.ServiceBClient;
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.DiscoveryClient;
+import org.krazyhawg.serviceb.client.ServiceBClient;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class ServiceAResources {
     }
 
     private String serviceBUrl() {
-        InstanceInfo instanceInfo = discoveryClient.getNextServerFromEureka("serviceB", false);
-        return instanceInfo.getHomePageUrl();
+        ServiceInstance serviceB = discoveryClient.getInstances("serviceB").get(0);
+        return serviceB.getUri().toString();
     }
 }

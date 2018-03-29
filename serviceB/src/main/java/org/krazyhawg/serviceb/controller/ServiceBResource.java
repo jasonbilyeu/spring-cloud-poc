@@ -1,7 +1,7 @@
-package com.blackbaud.serviceb.controller;
+package org.krazyhawg.serviceb.controller;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.DiscoveryClient;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +15,8 @@ public class ServiceBResource {
     private DiscoveryClient discoveryClient;
 
     public String serviceAUrl() {
-        InstanceInfo instanceInfo = discoveryClient.getNextServerFromEureka("serviceA", false);
-        return instanceInfo.getHomePageUrl();
+        ServiceInstance serviceA = discoveryClient.getInstances("serviceA").get(0);
+        return serviceA.getUri().toString();
     }
 
     @RequestMapping("/")

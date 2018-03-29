@@ -6,7 +6,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE")
 	}
 }
 
@@ -22,7 +22,11 @@ allprojects {
 	apply plugin: 'idea'
 }
 
-def SPRING_CLOUD_VERSION = 'Angel.SR6'
+def SPRING_CLOUD_VERSION = 'Finchley.M9'
+def SPRING_CLOUD_EUREKA_SERVER_VERSION = '1.4.4.RELEASE'
+def SPRING_CLOUD_BUS_AMQP_VERSION = '1.3.3.RELEASE'
+def SPRING_CLOUD_STARTER_FEIGN = '1.4.4.RELEASE'
+def SPRING_CLOUD_CONFIG_VERSION = '1.4.3.RELEASE'
 
 subprojects {
 	apply plugin: 'java'
@@ -32,15 +36,15 @@ subprojects {
 }
 
 project(':eurekaServer') {
-	apply plugin: 'spring-boot'
+	apply plugin: 'org.springframework.boot'
 
 	dependencies {
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
-		compile("org.springframework.cloud:spring-cloud-starter-eureka-server:1.0.6.RELEASE") {
+		compile("org.springframework.cloud:spring-cloud-starter-eureka-server:${SPRING_CLOUD_EUREKA_SERVER_VERSION}") {
 			exclude group: "javax.servlet", module: "servlet-api"
 		}
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
-		compile 'org.projectlombok:lombok:1.16.2'
+		compile 'org.projectlombok:lombok:1.16.16'
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
 	}
@@ -56,15 +60,15 @@ project(':eurekaServer') {
 }
 
 project(':configServer') {
-	apply plugin: 'spring-boot'
+	apply plugin: 'org.springframework.boot'
 
 	dependencies {
 		compile 'org.springframework.boot:spring-boot-starter-web'
-		compile 'org.springframework.cloud:spring-cloud-config-server:1.0.4.RELEASE'
-		compile 'com.sun.jersey:jersey-core:1.13'
+		compile "org.springframework.cloud:spring-cloud-config-server:${SPRING_CLOUD_CONFIG_VERSION}"
+		compile 'com.sun.jersey:jersey-core:1.19.4'
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-eureka:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
+		compile "org.springframework.cloud:spring-cloud-starter-eureka:${SPRING_CLOUD_EUREKA_SERVER_VERSION}"
+		compile "org.springframework.cloud:spring-cloud-starter-bus-amqp:${SPRING_CLOUD_BUS_AMQP_VERSION}"
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
@@ -77,19 +81,19 @@ project(':configServer') {
 }
 
 project(':serviceA') {
-	apply plugin: 'spring-boot'
+	apply plugin: 'org.springframework.boot'
 
 	dependencies {
 		compile 'org.springframework.boot:spring-boot-starter-web'
-		compile 'com.sun.jersey:jersey-core:1.13'
+		compile 'com.sun.jersey:jersey-core:1.19.4'
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-eureka:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-feign:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-config-client:1.0.4.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
+		compile "org.springframework.cloud:spring-cloud-starter-eureka:${SPRING_CLOUD_EUREKA_SERVER_VERSION}"
+		compile "org.springframework.cloud:spring-cloud-starter-feign:${SPRING_CLOUD_STARTER_FEIGN}"
+		compile "org.springframework.cloud:spring-cloud-config-client:${SPRING_CLOUD_CONFIG_VERSION}"
+		compile "org.springframework.cloud:spring-cloud-starter-bus-amqp:${SPRING_CLOUD_BUS_AMQP_VERSION}"
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
 		compile project(':serviceB')
-		compile 'com.netflix.hystrix:hystrix-javanica:1.3.17'
+		compile 'com.netflix.hystrix:hystrix-javanica:1.5.12'
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
 	}
@@ -101,19 +105,19 @@ project(':serviceA') {
 }
 
 project(':serviceB') {
-	apply plugin: 'spring-boot'
+	apply plugin: 'org.springframework.boot'
 
 	dependencies {
 		compile 'org.springframework.boot:spring-boot-starter-web'
-		compile 'com.sun.jersey:jersey-core:1.13'
+		compile 'com.sun.jersey:jersey-core:1.19.4'
 		compile 'org.springframework.cloud:spring-cloud-starter-parent:' + SPRING_CLOUD_VERSION
-		compile 'org.springframework.cloud:spring-cloud-starter-eureka:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-feign:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard:1.0.6.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-config-client:1.0.4.RELEASE'
-		compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp:1.0.3.RELEASE'
+		compile "org.springframework.cloud:spring-cloud-starter-eureka:${SPRING_CLOUD_EUREKA_SERVER_VERSION}"
+		compile "org.springframework.cloud:spring-cloud-starter-feign:${SPRING_CLOUD_STARTER_FEIGN}"
+		compile 'org.springframework.cloud:spring-cloud-starter-hystrix-dashboard:1.4.4.RELEASE'
+		compile "org.springframework.cloud:spring-cloud-config-client:${SPRING_CLOUD_CONFIG_VERSION}"
+		compile "org.springframework.cloud:spring-cloud-starter-bus-amqp:${SPRING_CLOUD_BUS_AMQP_VERSION}"
 		compile 'org.springframework.boot:spring-boot-starter-actuator'
-		compile 'com.netflix.hystrix:hystrix-javanica:1.3.17'
+		compile 'com.netflix.hystrix:hystrix-javanica:1.5.12'
 
 		testCompile 'org.springframework.boot:spring-boot-starter-test'
 	}

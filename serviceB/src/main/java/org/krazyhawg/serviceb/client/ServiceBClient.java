@@ -1,4 +1,4 @@
-package com.blackbaud.serviceb.client;
+package org.krazyhawg.serviceb.client;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

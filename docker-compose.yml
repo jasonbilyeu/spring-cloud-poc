@@ -1,87 +1,89 @@
-serviceadev1:
-   build: ./serviceA
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - "8080:8080"
-      - "8081:8081"
-   expose:
-      - "8080"
-      - "8081"
-   environment:
-      - spring.profiles.active=dev
-      - server.port=8080
-      - management.port=8081
-serviceadev2:
-   build: ./serviceA
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - "8180:8180"
-      - "8181:8181"
-   expose:
-      - "8180"
-      - "8181"
-   environment:
-      - spring.profiles.active=dev
-      - server.port=8180
-      - management.port=8181
-servicebdev1:
-   build: ./serviceB
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - "8380:8380"
-      - "8381:8381"
-   expose:
-      - "8380"
-      - "8381"
-   environment:
-      - spring.profiles.active=dev
-      - server.port=8380
-      - management.port=8381
-servicebdev2:
-   build: ./serviceB
-   links:
-      - configserver
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - "8480:8480"
-      - "8481:8481"
-   expose:
-      - "8480"
-      - "8481"
-   environment:
-      - spring.profiles.active=dev
-      - server.port=8480
-      - management.port=8481
-configserver:
-   build: ./configServer
-   links:
-      - eurekaserver
-      - rabbitmq
-   ports:
-      - "8888:8888"
-   expose:
-      - "8888"
-eurekaserver:
-   build: ./eurekaServer
-   ports:
-      - "8761:8761"
-   expose:
-      - "8761"
-rabbitmq:
-   build: ./rabbitmq
-   ports:
-      - "5672:5672"
-      - "15672:15672"
-   expose:
-      - "5672"
-      - "15672"
+version: '3'
+services:
+  serviceadev1:
+     build: ./serviceA
+     links:
+        - configserver
+        - eurekaserver
+        - rabbitmq
+     ports:
+        - "8080:8080"
+        - "8081:8081"
+     expose:
+        - "8080"
+        - "8081"
+     environment:
+        - spring.profiles.active=dev
+        - server.port=8080
+        - management.port=8081
+  serviceadev2:
+     build: ./serviceA
+     links:
+        - configserver
+        - eurekaserver
+        - rabbitmq
+     ports:
+        - "8180:8180"
+        - "8181:8181"
+     expose:
+        - "8180"
+        - "8181"
+     environment:
+        - spring.profiles.active=dev
+        - server.port=8180
+        - management.port=8181
+  servicebdev1:
+     build: ./serviceB
+     links:
+        - configserver
+        - eurekaserver
+        - rabbitmq
+     ports:
+        - "8380:8380"
+        - "8381:8381"
+     expose:
+        - "8380"
+        - "8381"
+     environment:
+        - spring.profiles.active=dev
+        - server.port=8380
+        - management.port=8381
+  servicebdev2:
+     build: ./serviceB
+     links:
+        - configserver
+        - eurekaserver
+        - rabbitmq
+     ports:
+        - "8480:8480"
+        - "8481:8481"
+     expose:
+        - "8480"
+        - "8481"
+     environment:
+        - spring.profiles.active=dev
+        - server.port=8480
+        - management.port=8481
+  configserver:
+     build: ./configServer
+     links:
+        - eurekaserver
+        - rabbitmq
+     ports:
+        - "8888:8888"
+     expose:
+        - "8888"
+  eurekaserver:
+     build: ./eurekaServer
+     ports:
+        - "8761:8761"
+     expose:
+        - "8761"
+  rabbitmq:
+     image: "rabbitmq:3.7.4"
+     ports:
+        - "5672:5672"
+        - "15672:15672"
+     expose:
+        - "5672"
+        - "15672"

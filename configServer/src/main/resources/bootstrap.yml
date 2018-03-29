@@ -14,10 +14,10 @@ spring:
     config:
       server:
         git:
-          uri: https://bitbucket.org/jasonbilyeu/spring-cloud-config-repo
+          uri: https://github.com/jasonbilyeu/spring-cloud-config-repo
           repos:
             - patterns: multi-repo-demo-*
-              uri: https://bitbucket.org/jasonbilyeu/spring-cloud-config-repo
+              uri: https://github.com/jasonbilyeu/spring-cloud-config-repo
 
 server:
   port: 8888
