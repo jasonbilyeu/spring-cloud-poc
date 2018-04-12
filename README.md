@@ -25,3 +25,4 @@ POC for Spring Cloud
 | If serviceA-dev.properties has occasionally.fail=true | for ((i=1;i<=1000;i++)); do   curl -s "localhost:8080" > /dev/null; done |
 | After config changes, post here for single refresh | curl -X POST http://localhost:8081/refresh |
 | After config changes, post here for bus refresh | curl -X POST http://localhost:8081/bus/refresh |
+| Presentation | https://docs.google.com/presentation/d/1zNfGjtzKYrd9hFXORAXqwMkVPeMenQb40auDtt2dgjw/edit?usp=sharing |
